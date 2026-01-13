@@ -140,6 +140,11 @@ Press Ctrl+C to stop the demo
 
 Simply click the URL shown or copy it to your Windows browser.
 
+### Example images
+There are 2 images in this repo that you can use for demo purposes:
+1) overhead-ship.jpg - This is an aerial photo of a cruise ship - This can be used for a 'non-threatening' example.
+2) navy-ship.jpg - This is an aerial photo of a navy vessel - This can be used for an 'adversarial' or 'enemy combatant' example.
+3) 
 ### First Run
 
 On first startup, the models will be downloaded from Hugging Face (~17GB total). This may take 10-15 minutes depending on network speed. Subsequent starts will be much faster as models are cached.
