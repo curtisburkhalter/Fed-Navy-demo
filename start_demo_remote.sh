@@ -5,14 +5,22 @@
 echo "================================================"
 echo "Maritime Surveillance Intelligence Generator"
 echo "Powered by HP ZGX Nano AI Station - Remote Start"
+echo "Using BLIP-2 FLAN-T5-XL + TinyLlama for intelligence reports"
 echo "================================================"
 echo ""
 
 # Get the hostname/IP of the Linux server
-HOSTNAME=$(hostname -I | awk '{print $1}')
+SERVER_IP=$(hostname -I | awk '{print $1}')
+
 echo "Server Information:"
-echo "  Hostname/IP: $HOSTNAME"
+echo "  Hostname/IP: $SERVER_IP"
 echo ""
+
+# Kill any existing processes on the ports
+echo "Cleaning up old processes..."
+lsof -ti:8000 | xargs kill -9 2>/dev/null
+lsof -ti:8080 | xargs kill -9 2>/dev/null
+sleep 2
 
 # Check if virtual environment exists
 if [ ! -d "navy-env" ]; then
@@ -38,24 +46,30 @@ if [ ! -f "frontend/index.html" ]; then
     echo "⚠ frontend/index.html not found - UI may not load"
 fi
 
-echo "================================================"
-echo "Starting Maritime Surveillance Demo Server..."
-echo "================================================"
 echo ""
-echo "Server will be accessible at:"
-echo "  Local:  http://localhost:8000"
-echo "  Remote: http://${HOSTNAME}:8000"
+echo "======================================"
+echo "✅ Demo is running!"
+echo "======================================"
 echo ""
-echo "For Windows laptop access via SSH tunnel:"
-echo "  1. Open PowerShell or Command Prompt on your Windows laptop"
-echo "  2. Run: ssh -L 8000:localhost:8000 $USER@${HOSTNAME}"
-echo "  3. Then open browser to: http://localhost:8000"
+echo "Access the demo from your Windows laptop:"
+echo "👉 http://${SERVER_IP}:8000"
 echo ""
-echo "Or use VS Code Remote SSH and forward port 8000"
+echo "Backend API endpoints:"
+echo "  - Status: http://${SERVER_IP}:8000/"
+echo "  - Load Models: http://${SERVER_IP}:8000/load_models"
+echo "  - Process Text: http://${SERVER_IP}:8000/mask_pii"
 echo ""
-echo "Press Ctrl+C to stop the server"
-echo "================================================"
+echo "Instructions:"
+echo "1. Open the web interface in your browser"
+echo "2. Select image to analyze"
+echo "3. Click Analyze Image"
+echo "4. Click 'Process & Compare' to see both models in action"
 echo ""
+echo "⚠️  Note: Models use ~32GB each. Ensure sufficient GPU memory!"
+echo ""
+echo "Press Ctrl+C to stop the demo"
+echo "======================================"
+
 
 # Start the FastAPI server
 python3 backend/main.py
