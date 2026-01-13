@@ -1,7 +1,6 @@
 # Maritime Surveillance Intelligence Generator
 
 **Powered by HP ZGX Nano AI Station**
-**This demo was created during my time as an AI Product Manager at HP**
 
 A Vision Language Model (VLM) demonstration for US Navy reconnaissance imagery analysis with synthetic geolocation and structured intelligence report generation.
 
@@ -112,8 +111,34 @@ python3 backend/main.py
 **Remote access (from Windows laptop):**
 ```bash
 ./start_demo_remote.sh
-# Follow the on-screen instructions for SSH tunnel or VS Code port forwarding
 ```
+
+The script will display the server IP and access URL:
+```
+======================================
+✅ Demo is running!
+======================================
+
+Access the demo from your Windows laptop:
+👉 http://192.168.x.x:8000
+
+Backend API endpoints:
+  - Status: http://192.168.x.x:8000/
+  - Health: http://192.168.x.x:8000/api/health
+  - Regions: http://192.168.x.x:8000/api/regions
+
+Instructions:
+1. Open the web interface in your browser
+2. Select image to analyze
+3. Click Analyze Image
+
+⚠️  Note: Models use ~17GB total. Ensure sufficient GPU memory!
+
+Press Ctrl+C to stop the demo
+======================================
+```
+
+Simply click the URL shown or copy it to your Windows browser.
 
 ### First Run
 
