@@ -101,6 +101,17 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount static files from frontend directory
+# This allows serving images like logos from /static/
+frontend_path = Path(__file__).parent.parent / "frontend"
+if frontend_path.exists():
+    app.mount("/static", StaticFiles(directory=frontend_path), name="static")
+else:
+    # Fallback: try frontend folder in same directory as main.py
+    frontend_path_alt = Path(__file__).parent / "frontend"
+    if frontend_path_alt.exists():
+        app.mount("/static", StaticFiles(directory=frontend_path_alt), name="static")
+
 # Global model references
 blip_processor = None
 blip_model = None
