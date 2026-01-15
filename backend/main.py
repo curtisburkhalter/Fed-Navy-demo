@@ -415,8 +415,7 @@ def enhance_caption_to_intel(image_analysis: dict, custom_instructions: str = ""
     
     # Build the structured report
     assessment = f"""1. VESSEL CLASSIFICATION
-   Type: {vessel_type.upper()}
-   Category: {vessel_category}
+    Category: {vessel_category}
 
 2. PHYSICAL CHARACTERISTICS
    Estimated Size: {size.capitalize()}
